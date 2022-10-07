@@ -17,11 +17,11 @@ done
 
 echo "MySQL is up and running!"
 
-#bundle exec rails db:create
-#bundle exec rails db:schema:load
+bundle exec rails db:create
+bundle exec rails db:schema:load
 bundle exec rails db:migrate
 bundle exec rake assets:precompile
-# bundle exec rails db:seed
+bundle exec rails db:seed
 
 if [ -f $pidfile ] ; then
 	>&2 echo 'Server PID file already exists. Removing it...';
@@ -29,5 +29,7 @@ if [ -f $pidfile ] ; then
 fi
 
 echo "Web server started"
+
+ps aux | grep passenger
 
 bundle exec passenger start --port $PORT --max-pool-size $POOL_SIZE --min-instances $POOL_SIZE
